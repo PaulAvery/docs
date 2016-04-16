@@ -1,0 +1,14 @@
+<nav class="main-menu">
+	<ul>
+		<li><a href="./" {{#eq link toplevel.link}}class="active"{{/eq}}>Introduction</a></li>
+	{{#each toplevel.categories}}
+		<li><a href="{{link}}" {{#eq link ../path.[1].link }}class="active"{{/eq}}>{{title}}</a></li>
+	{{/each}}
+
+	{{#each toplevel.pages}}
+		{{#unless index}}
+			<li><a href="{{link}}" {{#unless ../link }}class="active"{{/unless}}>{{title}}</a></li>
+		{{/unless}}
+	{{/each}}
+	</ul>
+</nav>

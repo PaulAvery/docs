@@ -1,0 +1,27 @@
+{{#neq parent toplevel}}
+	<nav class="sub-menu">
+		<ul class="category-list">
+			{{#each path.[1].categories}}
+				<li class="category {{#eq link ../link}}active{{/eq}}">
+					<div class="dot"></div>
+					<a href="{{link}}">{{title}}</a>
+				</li>
+				{{#each pages}}
+					{{#unless index}}
+						<li class="page child {{#eq link ../../link}}active{{/eq}}">
+							<div class="dot"></div>
+							<a href="{{link}}">{{title}}</a>
+						</li>
+					{{/unless}}
+				{{/each}}
+			{{/each}}
+
+			{{#each path.[1].pages}}
+				<li class="page {{#unless ../link}}active{{/unless}}">
+					<div class="dot"></div>
+					<a href="{{link}}">{{title}}</a>
+				</li>
+			{{/each}}
+		</ul>
+	</nav>
+{{/neq}}

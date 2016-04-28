@@ -4,7 +4,7 @@
 const fs = require('fs');
 const hbs = require('handlebars');
 const path = require('path');
-const slug = require('slug');
+const slugger = require('slug');
 const copy = require('recursive-copy');
 const highlights = new (require('highlights'))();
 
@@ -17,12 +17,12 @@ const md = require('markdown-it')({
 
 const index = 'index';
 
-const targetDir = path.resolve(process.cwd(), process.env['PAULAVERY_DOCS_OUT'] || 'docs_out');
+const targetDir = path.resolve(process.cwd(), process.env.PAULAVERY_DOCS_OUT || 'docs_out');
 const changeFile = path.join(targetDir, 'change');
 
-const docsDir = path.resolve(process.cwd(), process.env['PAULAVERY_DOCS_IN'] || 'docs');
+const docsDir = path.resolve(process.cwd(), process.env.PAULAVERY_DOCS_IN || 'docs');
 const assetDir = path.join(docsDir, 'assets');
-const sourceDir = path.join(docsDir,  'md');
+const sourceDir = path.join(docsDir, 'md');
 
 const themeDir = path.join(__dirname, '../theme');
 const staticDir = path.join(themeDir, 'static');
@@ -49,10 +49,32 @@ function slugify(pth) {
 	return path.join(
 		path.normalize(dir)
 			.split(path.sep)
-			.map(s => slug(s))
+			.map(s => slugger(s))
 			.join(path.sep),
-		slug(base) + (ext === '.md' ? '.html' : ext)
+		slugger(base) + (ext === '.md' ? '.html' : ext)
 	).toLowerCase();
+}
+
+/* Parse a file into a page object */
+function parsePage(file, parent, pth, toplevel) {
+	let page = { parent, toplevel };
+	let slug = slugify(path.relative(sourceDir, file));
+	let slugLink = slug === '.' ? '' : slug;
+
+	/* Assemble data */
+	page.pkg = parent.pkg;
+	page.depth = parent.depth;
+	page.source = file;
+	page.path = pth;
+	page.target = path.join(targetDir, slug);
+	page.index = path.basename(slug, '.html') === index;
+	page.title = page.index ? parent.title : path.basename(file, '.md');
+	page.link = page.index ? path.dirname(slugLink) : slugLink;
+
+	/* Load content and parse as markdown */
+	page.content = md.render(fs.readFileSync(page.source, 'utf8'));
+
+	return page;
 }
 
 /* Parse a directory into a category object */
@@ -69,7 +91,7 @@ function parseCategory(dir, parent, pth, toplevel) {
 	category.depth = parent ? parent.depth + 1 : 0;
 	category.title = parent ? path.basename(dir) : undefined;
 	category.source = dir;
-	category.path = pth || []
+	category.path = pth || [];
 	category.target = path.join(targetDir, slug);
 
 	/* Parse all directories as categories */
@@ -88,26 +110,9 @@ function parseCategory(dir, parent, pth, toplevel) {
 	return category;
 }
 
-/* Parse a file into a page object */
-function parsePage(file, parent, pth, toplevel) {
-	let page = {parent, toplevel};
-	let slug = slugify(path.relative(sourceDir, file));
-	let slugLink = slug === '.' ? '' : slug;
-
-	/* Assemble data */
-	page.pkg = parent.pkg;
-	page.depth = parent.depth;
-	page.source = file;
-	page.path = pth;
-	page.target = path.join(targetDir, slug);
-	page.index = path.basename(slug, '.html') === index
-	page.title = page.index ? parent.title : path.basename(file, '.md');
-	page.link = page.index ? path.dirname(slugLink) : slugLink;
-
-	/* Load content and parse as markdown */
-	page.content = md.render(fs.readFileSync(page.source, 'utf8'));
-
-	return page;
+/* Render a file object to the out directory */
+function renderPage(page) {
+	fs.writeFileSync(page.target, template(page));
 }
 
 /* Render a category object to the out directory */
@@ -120,11 +125,6 @@ function renderCategory(category) {
 
 	category.pages.forEach(renderPage);
 	category.categories.forEach(renderCategory);
-}
-
-/* Render a file object to the out directory */
-function renderPage(page) {
-	fs.writeFileSync(page.target, template(page));
 }
 
 /* Render everything */

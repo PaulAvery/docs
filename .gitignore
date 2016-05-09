@@ -1,2 +1,6 @@
 /node_modules
-/docs/out
+/.nyc_output
+/coverage
+/docs_out
+/.makerc
+/lib

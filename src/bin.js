@@ -5,7 +5,7 @@ const app = require('commander');
 const path = require('path');
 
 /* Own Stuff */
-const pkg = require('./package.json');
+const pkg = require('../package.json');
 const docs = require('./index');
 
 /* Define / parse data */

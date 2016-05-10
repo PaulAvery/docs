@@ -12,8 +12,7 @@ module.exports = options => {
 	/* Define all paths */
 	const root = options.source;
 	const target = options.target;
-	const source = path.join(root, 'md');
-	const assets = path.join(root, 'assets');
+	const source = path.join(root, 'src');
 	const themes = [
 		path.join(path.dirname(require.resolve(options.theme))),
 		path.join(root, 'theme')
@@ -30,5 +29,5 @@ module.exports = options => {
 	theme.compile({ pkg: options.data, tree }, glob.from(themes), glob.to(target));
 
 	/* Copy assets */
-	copyAssets(assets, target);
+	copyAssets(source, target);
 };

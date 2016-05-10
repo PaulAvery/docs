@@ -12,15 +12,16 @@ module.exports = (file, root, theme, fileMap) => {
 
 		/* Only handle relative links */
 		if(!parsedUrl.host && parsedUrl.pathname[0] !== '/') {
+			let fileTarget = theme.mapFile(fileMap[file]);
 			let linkTarget = path.resolve(path.dirname(file), link);
-			let inAssets = path.relative(path.join(root, 'assets'), linkTarget).substr(0, 3) !== '../';
-			let inMd = path.relative(path.join(root, 'md'), linkTarget).substr(0, 3) !== '../';
+			let isRelative = path.relative(root, linkTarget).substr(0, 3) !== '../';
+			let isMarkdown = isRelative && path.extname(linkTarget) === '.md';
+			let isAsset = isRelative && !isMarkdown;
 
-			if(inAssets) {
-				return link.substr(3);
-			} else if(inMd) {
-				let fileTarget = theme.mapFile(fileMap[file]);
-				return path.relative(fileTarget, theme.mapUrl(fileMap[linkTarget])).substr(3);
+			if(isAsset) {
+				return './' + path.relative(fileTarget, path.relative(path.join(root, 'src'), linkTarget)).substr(3);
+			} else if(isMarkdown) {
+				return './' + path.relative(fileTarget, theme.mapUrl(fileMap[linkTarget])).substr(3);
 			} else {
 				return link;
 			}

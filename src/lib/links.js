@@ -13,9 +13,9 @@ module.exports = (file, root, theme, fileMap) => {
 		/* Only handle relative links */
 		if(!parsedUrl.host && parsedUrl.pathname[0] !== '/') {
 			let fileTarget = theme.mapFile(fileMap[file]);
-			let linkTarget = path.resolve(path.dirname(file), link);
+			let linkTarget = path.resolve(path.dirname(file), decodeURI(link));
 			let isRelative = path.relative(root, linkTarget).substr(0, 3) !== '../';
-			let isMarkdown = isRelative && path.extname(linkTarget) === '.md';
+			let isMarkdown = isRelative && path.extname(linkTarget) === '.md' && fileMap[linkTarget];
 			let isAsset = isRelative && !isMarkdown;
 
 			if(isAsset) {

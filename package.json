@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "babel-runtime": "^6.6.1",
-    "@paulavery/docs-theme-cayman": "^1.0.0",
+    "@paulavery/docs-theme-cayman": "^1.1.0",
     "commander": "^2.9.0",
     "glob": "^7.0.3",
     "highlights": "^1.3.1",

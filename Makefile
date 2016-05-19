@@ -3,7 +3,7 @@ SRC = src
 LIB = lib
 TEST = test
 DOCS = docs
-DOCS_OUT = docs_out
+DOCS_OUT = docs/out
 DOCS_BRANCH = gh-pages
 LINE_COVERAGE = 100
 BRANCH_COVERAGE = 100
@@ -73,12 +73,12 @@ docs: node_modules $(DOCS_OUT)/.git
 ifeq ($(RUN_DOCS), true)
 	@rm --preserve-root -rf $(DOCS_OUT)/*
 	@echo '### Building docs'
-	@PAULAVERY_DOCS_IN='$(DOCS)' PAULAVERY_DOCS_OUT='$(DOCS_OUT)' $(BIN)/docs
+	@$(BIN)/docs -i '$(DOCS)' -o '$(DOCS_OUT)'
 endif
 
 # Serve documentation and rebuild as neccessary
 serve-docs: docs
-	@./node_modules/.bin/static-server $(DOCS_OUT) > /dev/null &
+	@$(BIN)/static-server $(DOCS_OUT) > /dev/null &
 	@echo 'Go to http://localhost:9080'
 	@while true; do \
 		inotifywait -qqr $(DOCS) package.json -e modify -e create -e delete -e move -e moved_to -e moved_from; \
@@ -117,15 +117,15 @@ ifeq ($(RUN_TEST), true)
 endif
 
 # Create a major release after building and checking everything
-relase-major: check-commit build test
+release-major: check-commit build test
 	@npm version major
 
 # Create a minor release after building and checking everything
-relase-minor: check-commit build test
+release-minor: check-commit build test
 	@npm version minor
 
 # Create a patch release after building and checking everything
-relase-patch: check-commit build test
+release-patch: check-commit build test
 	@npm version patch
 
 # Publish to git remote as well as npm

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>theme.js</title>
+
+	<base href="../">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href='//fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/deps/normalize.css">
+	<link rel="stylesheet" href="css/deps/cayman.css">
+	<link rel="stylesheet" href="css/highlight.css">
+	<link rel="stylesheet" href="css/header.css">
+	<link rel="stylesheet" href="css/menu.css">
+	<link rel="stylesheet" href="css/docs.css">
+
+	<script src="js/collapse.js"></script>
+	<script src="js/reload.js"></script>
+</head>
+<body class="collapsed">
+	<div class="page-wrap">
+		<section class="page-header placeholder">
+			<div><h1 class="project-name">@paulavery/docs</h1></div>
+<h2 class="project-tagline">A minimal documentation generator.</h2>
+<nav class="main-menu">
+	<ul>
+		<li><a href="./" >Introduction</a></li>
+		<li><a href="themes" class="active">Themes</a></li>
+
+			<li><a href="api.html" >API</a></li>
+			<li><a href="cli.html" >CLI</a></li>
+			<li><a href="input-structure.html" >Input Structure</a></li>
+	</ul>
+</nav>
+		</section>
+		<section class="page-header">
+			<div><h1 class="project-name">@paulavery/docs</h1></div>
+<h2 class="project-tagline">A minimal documentation generator.</h2>
+<nav class="main-menu">
+	<ul>
+		<li><a href="./" >Introduction</a></li>
+		<li><a href="themes" class="active">Themes</a></li>
+
+			<li><a href="api.html" >API</a></li>
+			<li><a href="cli.html" >CLI</a></li>
+			<li><a href="input-structure.html" >Input Structure</a></li>
+	</ul>
+</nav>
+		</section>
+		<div class="main-column">
+				<nav class="sub-menu">
+		<ul class="category-list">
+
+				<li class="page ">
+					<div class="dot"></div>
+					<a href="themes/overrides.html">Overrides</a>
+				</li>
+				<li class="page ">
+					<div class="dot"></div>
+					<a href="themes">Themes</a>
+				</li>
+				<li class="page active">
+					<div class="dot"></div>
+					<a href="themes/themejs.html">theme.js</a>
+				</li>
+		</ul>
+	</nav>
+			<section class="main-content">
+				<h1>theme.js</h1>
+<p>A themes <code>theme.js</code> file should export five methods to work properly.<br>
+For a full example, check out the <a href="https://github.com/PaulAvery/docs-theme-cayman">@paulavery/docs-theme-cayman</a> package.</p>
+<h2>mapUrl(level)</h2>
+<p>The <code>mapUrl()</code> method is used by the library in conjuction with <code>mapFile()</code> to properly resolve links. It is passed a level of the parsed structure (see <a href="../Input%20Structure.md">Input Structure</a>) and is expected ro return the url under which this entry will be reachable once generation of the documentation is complete.</p>
+<p>This allows for both, separate output files per entry, as well as a single page with hash based addressing of entries.</p>
+<h2>mapFile(level)</h2>
+<p>The <code>mapFile()</code> method is passed a level of the structure, just like <code>mapUrl()</code>. Instead of returning the url to the entry, it should return the filesystem path to the output file.</p>
+<h2>assignHighlighters(highlighter)</h2>
+<p>This method gives the theme the ability to modify the <a href="https://atom.github.io/highlights/">highlights</a> instance used to highlight code blocks. This allows you to register specific highlighters if your project requires it.</p>
+<pre class="editor editor-colors"><div class="line"><span class="text plain null-grammar"><span>eports.assignHighlighters&nbsp;=&nbsp;highlighter&nbsp;=&gt;&nbsp;{</span></span></div><div class="line"><span class="text plain null-grammar"><span>	highlighter.requireGrammarsSync({</span></span></div><div class="line"><span class="text plain null-grammar"><span>		modulePath:&nbsp;require.resolve(&#39;atom-language-clojure/package.json&#39;)</span></span></div><div class="line"><span class="text plain null-grammar"><span>	});</span></span></div><div class="line"><span class="text plain null-grammar"><span>}</span></span></div></pre>
+<h2>assignMarkdown(markdown)</h2>
+<p>Similar to the <code>assignHighlighters</code> method, the <code>assignMarkdown</code> method gives the theme the ability to modify the <a href="https://github.com/markdown-it/markdown-it">markdown-it</a> instance used to render the markdown files. This allows you to extend rendering with a multitude of plugins.</p>
+<pre class="editor editor-colors"><div class="line"><span class="text plain null-grammar"><span>eports.assignMarkdown&nbsp;=&nbsp;markdown&nbsp;=&gt;&nbsp;{</span></span></div><div class="line"><span class="text plain null-grammar"><span>	markdown.use(require(&#39;markdown-it-toc-and-anchor&#39;).default);</span></span></div><div class="line"><span class="text plain null-grammar"><span>}</span></span></div></pre>
+<h2>compile(root, from, to)</h2>
+<p>The <code>compile()</code> method is the main “meat” of the theme, so to speak. It is passed the root entry as well as configuration options and a couple of utility functions.</p>
+
+			</section>
+		</div>
+	</div>
+	<footer class="site-footer">
+		<div>
+	<span class="site-footer-owner"><a href="">@paulavery/docs</a> is maintained by <a href="https://github.com/PaulAvery/">Florian Albertz</a>.</span>
+	<span class="site-footer-credits">This page uses a modified version of the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+</div>
+	</footer>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Input Structure</title>
+
+	<base href="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href='//fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/deps/normalize.css">
+	<link rel="stylesheet" href="css/deps/cayman.css">
+	<link rel="stylesheet" href="css/highlight.css">
+	<link rel="stylesheet" href="css/header.css">
+	<link rel="stylesheet" href="css/menu.css">
+	<link rel="stylesheet" href="css/docs.css">
+
+	<script src="js/collapse.js"></script>
+	<script src="js/reload.js"></script>
+</head>
+<body class="collapsed">
+	<div class="page-wrap">
+		<section class="page-header placeholder">
+			<div><h1 class="project-name">@paulavery/docs</h1></div>
+<h2 class="project-tagline">A minimal documentation generator.</h2>
+<nav class="main-menu">
+	<ul>
+		<li><a href="./" >Introduction</a></li>
+		<li><a href="themes" >Themes</a></li>
+
+			<li><a href="api.html" >API</a></li>
+			<li><a href="cli.html" >CLI</a></li>
+			<li><a href="input-structure.html" class="active">Input Structure</a></li>
+	</ul>
+</nav>
+		</section>
+		<section class="page-header">
+			<div><h1 class="project-name">@paulavery/docs</h1></div>
+<h2 class="project-tagline">A minimal documentation generator.</h2>
+<nav class="main-menu">
+	<ul>
+		<li><a href="./" >Introduction</a></li>
+		<li><a href="themes" >Themes</a></li>
+
+			<li><a href="api.html" >API</a></li>
+			<li><a href="cli.html" >CLI</a></li>
+			<li><a href="input-structure.html" class="active">Input Structure</a></li>
+	</ul>
+</nav>
+		</section>
+		<div class="main-column">
+						<section class="main-content">
+				<h1>Structuring your documentation</h1>
+<p>Input files should be placed in a subfolder of the specified input directory named <code>src</code>. You may create subfolders and arbitrarily named markdown files.</p>
+<p>Each file or folder is parsed into an entry which may have an arbitrary number of children. This means you wont be able to distinguish files from folders later on.</p>
+<p>A file or folders name will be used (without the extension) as this entries title. If a markdown file is named <code>index.md</code>, it will be used as the content of its parent directory. So the following structure:</p>
+<pre><code>┌─ index.md
+├─ CLI.md
+└─ Examples
+   ├─ Example 1.md
+   └─ Example 2.md
+</code></pre>
+<p>Will result in the following parsed structure:</p>
+<pre class="editor editor-colors"><div class="line"><span class="text plain null-grammar"><span>{</span></span></div><div class="line"><span class="text plain null-grammar"><span>	name:&nbsp;&#39;&#39;,</span></span></div><div class="line"><span class="text plain null-grammar"><span>	content:&nbsp;&lt;Content&nbsp;of&nbsp;index.md&gt;,</span></span></div><div class="line"><span class="text plain null-grammar"><span>	children:&nbsp;[{</span></span></div><div class="line"><span class="text plain null-grammar"><span>		name:&nbsp;&#39;CLI&#39;,</span></span></div><div class="line"><span class="text plain null-grammar"><span>		link:&nbsp;&lt;Dependent&nbsp;on&nbsp;your&nbsp;theme&gt;,</span></span></div><div class="line"><span class="text plain null-grammar"><span>		target:&nbsp;&lt;Dependent&nbsp;on&nbsp;your&nbsp;theme&gt;,</span></span></div><div class="line"><span class="text plain null-grammar"><span>		content:&nbsp;&lt;Parsed&nbsp;content&nbsp;of&nbsp;index.md&gt;,</span></span></div><div class="line"><span class="text plain null-grammar"><span>		children:&nbsp;[]</span></span></div><div class="line"><span class="text plain null-grammar"><span>	},&nbsp;{</span></span></div><div class="line"><span class="text plain null-grammar"><span>		name:&nbsp;&#39;Examples&#39;,</span></span></div><div class="line"><span class="text plain null-grammar"><span>		link:&nbsp;&lt;Dependent&nbsp;on&nbsp;your&nbsp;theme&gt;,</span></span></div><div class="line"><span class="text plain null-grammar"><span>		target:&nbsp;&lt;Dependent&nbsp;on&nbsp;your&nbsp;theme&gt;,</span></span></div><div class="line"><span class="text plain null-grammar"><span>		content:&nbsp;&#39;&#39;,</span></span></div><div class="line"><span class="text plain null-grammar"><span>		children:&nbsp;[{</span></span></div><div class="line"><span class="text plain null-grammar"><span>			name:&nbsp;&#39;Example&nbsp;1&#39;,</span></span></div><div class="line"><span class="text plain null-grammar"><span>			link:&nbsp;&lt;Dependent&nbsp;on&nbsp;your&nbsp;theme&gt;,</span></span></div><div class="line"><span class="text plain null-grammar"><span>			target:&nbsp;&lt;Dependent&nbsp;on&nbsp;your&nbsp;theme&gt;,</span></span></div><div class="line"><span class="text plain null-grammar"><span>			content:&nbsp;&lt;Parsed&nbsp;content&nbsp;of&nbsp;Example&nbsp;1.md&gt;</span></span></div><div class="line"><span class="text plain null-grammar"><span>			children:&nbsp;[]</span></span></div><div class="line"><span class="text plain null-grammar"><span>		},&nbsp;{</span></span></div><div class="line"><span class="text plain null-grammar"><span>			name:&nbsp;&#39;Example&nbsp;1&#39;,</span></span></div><div class="line"><span class="text plain null-grammar"><span>			link:&nbsp;&lt;Dependent&nbsp;on&nbsp;your&nbsp;theme&gt;,</span></span></div><div class="line"><span class="text plain null-grammar"><span>			target:&nbsp;&lt;Dependent&nbsp;on&nbsp;your&nbsp;theme&gt;,</span></span></div><div class="line"><span class="text plain null-grammar"><span>			content:&nbsp;&lt;Parsed&nbsp;content&nbsp;of&nbsp;Example&nbsp;1.md&gt;</span></span></div><div class="line"><span class="text plain null-grammar"><span>			children:&nbsp;[]</span></span></div><div class="line"><span class="text plain null-grammar"><span>		}]</span></span></div><div class="line"><span class="text plain null-grammar"><span>	}]</span></span></div><div class="line"><span class="text plain null-grammar"><span>}</span></span></div></pre>
+<p>How this structure is translated into output files entirely depends on your theme.</p>
+
+			</section>
+		</div>
+	</div>
+	<footer class="site-footer">
+		<div>
+	<span class="site-footer-owner"><a href="">@paulavery/docs</a> is maintained by <a href="https://github.com/PaulAvery/">Florian Albertz</a>.</span>
+	<span class="site-footer-credits">This page uses a modified version of the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+</div>
+	</footer>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>API</title>
+
+	<base href="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href='//fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/deps/normalize.css">
+	<link rel="stylesheet" href="css/deps/cayman.css">
+	<link rel="stylesheet" href="css/highlight.css">
+	<link rel="stylesheet" href="css/header.css">
+	<link rel="stylesheet" href="css/menu.css">
+	<link rel="stylesheet" href="css/docs.css">
+
+	<script src="js/collapse.js"></script>
+	<script src="js/reload.js"></script>
+</head>
+<body class="collapsed">
+	<div class="page-wrap">
+		<section class="page-header placeholder">
+			<div><h1 class="project-name">@paulavery/docs</h1></div>
+<h2 class="project-tagline">A minimal documentation generator.</h2>
+<nav class="main-menu">
+	<ul>
+		<li><a href="./" >Introduction</a></li>
+		<li><a href="themes" >Themes</a></li>
+
+			<li><a href="api.html" class="active">API</a></li>
+			<li><a href="cli.html" >CLI</a></li>
+			<li><a href="input-structure.html" >Input Structure</a></li>
+	</ul>
+</nav>
+		</section>
+		<section class="page-header">
+			<div><h1 class="project-name">@paulavery/docs</h1></div>
+<h2 class="project-tagline">A minimal documentation generator.</h2>
+<nav class="main-menu">
+	<ul>
+		<li><a href="./" >Introduction</a></li>
+		<li><a href="themes" >Themes</a></li>
+
+			<li><a href="api.html" class="active">API</a></li>
+			<li><a href="cli.html" >CLI</a></li>
+			<li><a href="input-structure.html" >Input Structure</a></li>
+	</ul>
+</nav>
+		</section>
+		<div class="main-column">
+						<section class="main-content">
+				<h1>Usage as a library</h1>
+<p>If required, the module can be used programmatically. It exports a single function which takes an option object.</p>
+<pre class="editor editor-colors"><div class="line"><span class="text plain null-grammar"><span>let&nbsp;docs&nbsp;=&nbsp;require(&#39;@paulavery/docs&#39;);</span></span></div><div class="line"><span class="text plain null-grammar"><span>&nbsp;</span></span></div><div class="line"><span class="text plain null-grammar"><span>docs({</span></span></div><div class="line"><span class="text plain null-grammar"><span>	source:&nbsp;&#39;docs&#39;,</span></span></div><div class="line"><span class="text plain null-grammar"><span>	target:&nbsp;&#39;docs/out&#39;,</span></span></div><div class="line"><span class="text plain null-grammar"><span>	theme:&nbsp;&#39;@paulavery/docs-theme-cayman&#39;,</span></span></div><div class="line"><span class="text plain null-grammar"><span>	data:&nbsp;require(&#39;./package.json&#39;);</span></span></div><div class="line"><span class="text plain null-grammar"><span>});</span></span></div></pre>
+<p>The options object has no default values, so you need to provide everything.</p>
+<h2>Options</h2>
+<h3>source</h3>
+<p>The source directory containing the markdown files.</p>
+<h3>target</h3>
+<p>The target directory into which the results will be written.</p>
+<h3>theme</h3>
+<p>Path to a theme folder or module. Will be resolved with <code>required.resolve()</code>.<br>
+For more information on themes see <a href="Themes">here</a>.</p>
+<h3>data</h3>
+<p>The data to be used by the theme. This is theme dependent but the cli uses the packages parsed <code>package.json</code> as the default theme works under the assumption that it is passed.</p>
+
+			</section>
+		</div>
+	</div>
+	<footer class="site-footer">
+		<div>
+	<span class="site-footer-owner"><a href="">@paulavery/docs</a> is maintained by <a href="https://github.com/PaulAvery/">Florian Albertz</a>.</span>
+	<span class="site-footer-credits">This page uses a modified version of the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+</div>
+	</footer>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Overrides</title>
+
+	<base href="../">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href='//fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/deps/normalize.css">
+	<link rel="stylesheet" href="css/deps/cayman.css">
+	<link rel="stylesheet" href="css/highlight.css">
+	<link rel="stylesheet" href="css/header.css">
+	<link rel="stylesheet" href="css/menu.css">
+	<link rel="stylesheet" href="css/docs.css">
+
+	<script src="js/collapse.js"></script>
+	<script src="js/reload.js"></script>
+</head>
+<body class="collapsed">
+	<div class="page-wrap">
+		<section class="page-header placeholder">
+			<div><h1 class="project-name">@paulavery/docs</h1></div>
+<h2 class="project-tagline">A minimal documentation generator.</h2>
+<nav class="main-menu">
+	<ul>
+		<li><a href="./" >Introduction</a></li>
+		<li><a href="themes" class="active">Themes</a></li>
+
+			<li><a href="api.html" >API</a></li>
+			<li><a href="cli.html" >CLI</a></li>
+			<li><a href="input-structure.html" >Input Structure</a></li>
+	</ul>
+</nav>
+		</section>
+		<section class="page-header">
+			<div><h1 class="project-name">@paulavery/docs</h1></div>
+<h2 class="project-tagline">A minimal documentation generator.</h2>
+<nav class="main-menu">
+	<ul>
+		<li><a href="./" >Introduction</a></li>
+		<li><a href="themes" class="active">Themes</a></li>
+
+			<li><a href="api.html" >API</a></li>
+			<li><a href="cli.html" >CLI</a></li>
+			<li><a href="input-structure.html" >Input Structure</a></li>
+	</ul>
+</nav>
+		</section>
+		<div class="main-column">
+				<nav class="sub-menu">
+		<ul class="category-list">
+
+				<li class="page active">
+					<div class="dot"></div>
+					<a href="themes/overrides.html">Overrides</a>
+				</li>
+				<li class="page ">
+					<div class="dot"></div>
+					<a href="themes">Themes</a>
+				</li>
+				<li class="page ">
+					<div class="dot"></div>
+					<a href="themes/themejs.html">theme.js</a>
+				</li>
+		</ul>
+	</nav>
+			<section class="main-content">
+				<h1>Overriding parts of the theme</h1>
+<p>You may override any method or file a theme provides for your project. Simply create a <code>theme</code> folder next to your <code>src</code> folder.<br>
+Any method exported from a <code>theme.js</code> file will override the one from the used theme.</p>
+<p>Any other file inside the folder will override the same file in the themes folder.</p>
+<p>So if you want to add an external link to the main menu of the default theme, you may create the file <code>docs/theme/template/partials/menu.hbs</code> with the following content:</p>
+<pre class="editor editor-colors"><div class="line"><span class="text plain null-grammar"><span>&lt;nav&nbsp;class=&quot;main-menu&quot;&gt;</span></span></div><div class="line"><span class="text plain null-grammar"><span>	&lt;ul&gt;</span></span></div><div class="line"><span class="text plain null-grammar"><span>		&lt;li&gt;&lt;a&nbsp;href=&quot;</span><span class="markup underline link http hyperlink"><span>http://external.link</span></span><span>&quot;&gt;External!&lt;/a&gt;&lt;/li&gt;</span></span></div><div class="line"><span class="text plain null-grammar"><span>		&lt;li&gt;&lt;a&nbsp;href=&quot;./{{up}}&quot;&nbsp;{{#eq&nbsp;page.link&nbsp;&#39;&#39;}}class=&quot;active&quot;{{/eq}}&gt;Introduction&lt;/a&gt;&lt;/li&gt;</span></span></div><div class="line"><span class="text plain null-grammar"><span>		{{#top}}</span></span></div><div class="line"><span class="text plain null-grammar"><span>			{{#each&nbsp;children}}</span></span></div><div class="line"><span class="text plain null-grammar"><span>				&lt;li&gt;&lt;a&nbsp;href=&quot;{{up}}{{link}}&quot;&nbsp;{{#eq&nbsp;link&nbsp;../../page.link&nbsp;}}class=&quot;active&quot;{{/eq}}&gt;{{name}}&lt;/a&gt;&lt;/li&gt;</span></span></div><div class="line"><span class="text plain null-grammar"><span>			{{/each}}</span></span></div><div class="line"><span class="text plain null-grammar"><span>		{{/top}}</span></span></div><div class="line"><span class="text plain null-grammar"><span>	&lt;/ul&gt;</span></span></div><div class="line"><span class="text plain null-grammar"><span>&lt;/nav&gt;</span></span></div></pre>
+
+			</section>
+		</div>
+	</div>
+	<footer class="site-footer">
+		<div>
+	<span class="site-footer-owner"><a href="">@paulavery/docs</a> is maintained by <a href="https://github.com/PaulAvery/">Florian Albertz</a>.</span>
+	<span class="site-footer-credits">This page uses a modified version of the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+</div>
+	</footer>
+</body>
+</html>

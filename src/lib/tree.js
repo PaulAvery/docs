@@ -62,6 +62,11 @@ module.exports = (source, theme, render) => {
 			.map(file => renderFile(file, level))
 			.forEach(file => level.children.push(file));
 
+		/* Assign empty content if we have no index */
+		if(!index[0]) {
+			level.content = '';
+		}
+
 		/* Assign link and target file */
 		level.link = theme.mapUrl(level);
 		level.target = theme.mapFile(level);

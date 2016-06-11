@@ -50,7 +50,7 @@ module.exports = (source, theme, render) => {
 		let files = entries.filter(entry => entry.stat.isFile()).map(entry => entry.name);
 		let index = files.filter(file => path.basename(file) === 'index.md');
 		let nonindex = files.filter(file => path.basename(file) !== 'index.md' && path.extname(file) === '.md');
-		let directories = entries.filter(entry => entry.stat.isDirectory()).map(entry => entry.name);
+		let directories = entries.filter(entry => entry.stat.isDirectory() && fs.readdirSync(entry.name).length > 0).map(entry => entry.name);
 
 		/* Process each directory recursively */
 		directories

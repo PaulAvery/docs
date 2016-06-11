@@ -55,6 +55,8 @@ module.exports = (source, theme, render) => {
 		/* Process each directory recursively */
 		directories
 			.map(dir => renderLevel(dir, level))
+			/* Filter out empty / non-md file containing directories */
+			.filter(dir => dir)
 			.forEach(dir => level.children.push(dir));
 
 		/* Render each file */
@@ -84,7 +86,11 @@ module.exports = (source, theme, render) => {
 		}
 
 		/* Return the compiled level */
-		return level;
+		if(level.content !== '' || level.children.length > 0) {
+			return level;
+		} else {
+			return false;
+		}
 	}
 
 	/* Assemble the level */
